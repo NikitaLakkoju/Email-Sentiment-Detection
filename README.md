@@ -2,6 +2,7 @@
 
 This project performs sentiment analysis on incoming Gmail emails using **two local LLMs (Gemma 2B and Yi 9B)** via [Ollama](https://ollama.com/), and routes emails accordingly based on sentiment (positive, negative, neutral). It stores the results in a MySQL database and displays them in an interactive Flask dashboard.
 
+
 🔍 Features
 
 - 📬 Fetch unread Gmail emails
@@ -11,12 +12,14 @@ This project performs sentiment analysis on incoming Gmail emails using **two lo
 - 🗂 MySQL database for full email + sentiment history
 - 📤 Forward emails based on sentiment to different teams
 
+
 🧪 Model Comparison
 
 This project supports **running both LLMs (Gemma 2B and Yi 9B)** on the same emails for comparison.  
 Observations:
 - **Yi 9B** tends to highlight more sentiment-driving keywords but sometimes over-labels.
 - **Gemma 2B** is more conservative but more consistent in sentiment labeling.
+
 
 
 📦 email_sentiment_dashboard_v2/
@@ -31,7 +34,9 @@ Observations:
 ├── requirements.txt         # Python dependencies list (Flask, mysql-connector, etc.)
 
 
+
 🧩 Setup:
+
 
 - Project folder: email_sentiment_dashboard_v2
 Python virtual environment (venv) is located in the project folder.
@@ -39,7 +44,8 @@ Python virtual environment (venv) is located in the project folder.
 You have the following Python scripts:
 - fetch_loop.py → fetches unread emails
 - app.py → runs the Flask dashboard
-- 
+
+  
 MySQL is already running (locally)
 Ollama is already running and listening (Gemma or Yi model is pulled)
 
