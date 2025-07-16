@@ -27,14 +27,14 @@ Observations:
 
 📦 email_sentiment_dashboard_v2/
 ├── templates/
-│   └── dashboard.html       # Frontend UI for the dashboard (HTML + Chart.js)
-├── venv/                    # Python virtual environment (excluded from Git)
-├── .env                     # Environment variables (e.g., DB credentials)
-├── app.py                   # Flask backend to serve the dashboard
-├── database.sql             # SQL file to create the `emails` table
-├── fetch_loop.py            # Script to fetch, analyze, and store new emails
-├── process_email.py         # Core logic: LLM (Gemma/Yi) based sentiment + keyword highlight
-├── requirements.txt         # Python dependencies list (Flask, mysql-connector, etc.)
+│   └── dashboard.html       
+├── venv/                    
+├── .env                    
+├── app.py                
+├── database.sql         
+├── fetch_loop.py           
+├── process_email.py     
+├── requirements.txt       
 
 
 ---------------
