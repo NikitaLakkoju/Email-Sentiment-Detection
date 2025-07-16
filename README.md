@@ -23,8 +23,7 @@ Observations:
 
 ---------------
 
-⚙️ PROJECT ARCHITECTURE: 
-### ⚙️ Project Architecture
+### ⚙️ PROJECT ARCHITECTURE:
 
 ```text
 📦 email_sentiment_dashboard_v2
