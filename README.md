@@ -25,16 +25,7 @@ Observations:
 
 ⚙️ PROJECT ARCHITECTURE: 
 
-📦 email_sentiment_dashboard_v2/
-├── templates/
-│   └── dashboard.html       
-├── venv/                    
-├── .env                    
-├── app.py                
-├── database.sql         
-├── fetch_loop.py           
-├── process_email.py     
-├── requirements.txt       
+<img width="576" height="208" alt="Screenshot 2025-07-16 at 4 36 50 PM" src="https://github.com/user-attachments/assets/49ebd527-2362-47fa-b4c2-e7b30edbe75e" />
 
 
 ---------------
