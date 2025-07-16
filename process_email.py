@@ -115,7 +115,7 @@ Email:
         res = requests.post(
             "http://localhost:11434/api/generate",
             json={"model": "gemma:2b", "prompt": prompt, "stream": False}
-        )
+        )#HERE YOU CAN CHANGE THE MODEL TO YI:9B(OR ANY MODEL) AND RUN TO TEST IT OUT 
 
         if res.status_code != 200:
             print(f"❌ Ollama LLM Error: HTTP {res.status_code}")
