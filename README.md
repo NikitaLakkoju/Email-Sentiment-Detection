@@ -13,7 +13,7 @@ This project performs sentiment analysis on incoming Gmail emails using **two lo
 - 📤 Forward emails based on sentiment to different teams
 
 
-🧪 Model Comparison
+#🧪 Model Comparison
 
 This project supports **running both LLMs (Gemma 2B and Yi 9B)** on the same emails for comparison.  
 Observations:
