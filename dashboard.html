@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Email Sentiment Dashboard</title>
+    <meta http-equiv="refresh" content="180"> <!-- Auto-refresh every 3 mins -->
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f9f9f9;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        form {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input, select, button {
+            padding: 6px;
+            font-size: 14px;
+        }
+
+        .dashboard-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: flex-start;
+            width: 100%;
+            gap: 20px;
+        }
+
+        .chart-container {
+            flex: 0 0 400px;
+        }
+
+        .email-table-container {
+            flex: 1;
+            max-height: 550px;
+            overflow-y: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 6px;
+            text-align: left;
+        }
+
+        th {
+            background: #eee;
+            position: sticky;
+            top: 0;
+        }
+
+        .positive { background-color: #d4edda; }
+        .negative { background-color: #f8d7da; }
+        .neutral  { background-color: #fff3cd; }
+
+        mark {
+            background-color: yellow;
+            font-weight: bold;
+        }
+
+        .delete-btn {
+            background: red;
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            cursor: pointer;
+            font-size: 12px;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-container {
+                flex-direction: column;
+            }
+
+            .chart-container {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Email Sentiment Dashboard</h1>
+
+    <!-- 🔍 Filter form -->
+    <form method="get" action="/">
+        <label for="sentiment">Sentiment:</label>
+        <select name="sentiment" id="sentiment">
+            <option value="">All</option>
+            <option value="positive" {% if selected_sentiment == 'positive' %}selected{% endif %}>Positive</option>
+            <option value="negative" {% if selected_sentiment == 'negative' %}selected{% endif %}>Negative</option>
+            <option value="neutral" {% if selected_sentiment == 'neutral' %}selected{% endif %}>Neutral</option>
+        </select>
+
+        <label for="sender">Sender Email:</label>
+        <input type="text" name="sender" id="sender" placeholder="example@email.com" value="{{ selected_sender or '' }}">
+
+        <label for="start_date">From:</label>
+        <input type="date" name="start_date" id="start_date" value="{{ start_date or '' }}">
+
+        <label for="end_date">To:</label>
+        <input type="date" name="end_date" id="end_date" value="{{ end_date or '' }}">
+
+        <button type="submit">Filter</button>
+    </form>
+
+    <!-- 🔁 Manual Refresh Button -->
+    <form method="post" action="/refresh" style="margin-bottom: 20px;">
+        <button type="submit">🔄 Refresh Now (Check for New Email)</button>
+    </form>
+
+    <div class="dashboard-container">
+        <!-- 📊 Pie chart -->
+        <div class="chart-container">
+            <canvas id="sentimentChart" width="350" height="350"></canvas>
+        </div>
+
+        <!-- 📬 Email table -->
+        <div class="email-table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sender</th>
+                        <th>Subject</th>
+                        <th>Body</th>
+                        <th>Sentiment</th>
+                        <th>Received At</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for email in emails %}
+                    <tr class="{{ email.sentiment }}">
+                        <td>{{ email.sender }}</td>
+                        <td>{{ email.subject }}</td>
+                        <td>{{ email.highlighted_body | safe }}</td>
+                        <td>{{ email.sentiment }}</td>
+                        <td>{{ email.received_at }}</td>
+                        <td>
+                            <form method="post" action="/delete/{{ email.id }}" onsubmit="return confirm('Delete this email?');">
+                                <button type="submit" class="delete-btn">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const sentimentCounts = JSON.parse('{{ sentiment_counts | tojson | safe }}');
+        const ctx = document.getElementById('sentimentChart').getContext('2d');
+
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Positive', 'Negative', 'Neutral'],
+                datasets: [{
+                    data: [
+                        sentimentCounts.positive || 0,
+                        sentimentCounts.negative || 0,
+                        sentimentCounts.neutral || 0
+                    ],
+                    backgroundColor: ['#28a745', '#dc3545', '#ffc107']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'bottom' }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
