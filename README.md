@@ -45,7 +45,7 @@ Observations:
 
 
 - Project folder: email_sentiment_dashboard_v2
-Python virtual environment (venv) is located in the project folder.
+- Python virtual environment (venv) is located in the project folder.
 
 You have the following Python scripts:
 - fetch_loop.py → fetches unread emails
@@ -55,18 +55,15 @@ You have the following Python scripts:
 MySQL is already running (locally)
 Ollama is already running and listening (Gemma or Yi model is pulled)
 
----------------
-
-FINAL STEPS:
-
-You need to
 - Activate the virtual environment
 - Run the fetcher loop
 - Launch the Flask dashboard
 
 ---------------
 
-📄 License
+📄 License:
+
+
 This project is licensed under the Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0).
 
 © 2025 Nikita Lakkoju. All rights reserved.
