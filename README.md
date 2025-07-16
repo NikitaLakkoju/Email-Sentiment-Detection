@@ -24,8 +24,21 @@ Observations:
 ---------------
 
 ⚙️ PROJECT ARCHITECTURE: 
+### ⚙️ Project Architecture
 
-<pre> ```text 📦 email_sentiment_dashboard_v2/ ├── templates/ # HTML templates for Flask │ └── dashboard.html # Interactive dashboard UI ├── venv/ # Python virtual environment (not pushed to GitHub) ├── .env # Environment variables (DB creds, secret keys) ├── app.py # Flask server to render the dashboard and handle routes ├── database.sql # MySQL schema for storing emails and sentiments ├── fetch_loop.py # Script to fetch and classify new emails using LLMs ├── process_email.py # LLM prompt logic, sentiment classification & keyword highlighting ├── requirements.txt # All Python dependencies for the project ``` </pre>
+```text
+📦 email_sentiment_dashboard_v2
+├── templates
+│   └── dashboard.html
+├── venv
+├── .env
+├── app.py
+├── database.sql
+├── fetch_loop.py
+├── process_email.py
+├── requirements.txt
+```
+
 
 ---------------
 
